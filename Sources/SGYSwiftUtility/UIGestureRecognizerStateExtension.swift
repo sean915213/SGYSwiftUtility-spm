@@ -9,7 +9,7 @@
 
 import UIKit
 
-extension UIGestureRecognizerState: CustomDebugStringConvertible {
+extension UIGestureRecognizer.State: CustomDebugStringConvertible {
     
     public var debugDescription: String {
         switch self {
@@ -19,7 +19,7 @@ extension UIGestureRecognizerState: CustomDebugStringConvertible {
         case .ended: return "Ended"
         case .failed: return "Failed"
         case .possible: return "Possible"
-        case .recognized: return "Recognized"
+        @unknown default: return "Unknown"
         }
     }
 }
