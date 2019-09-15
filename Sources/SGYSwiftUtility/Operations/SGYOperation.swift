@@ -10,14 +10,7 @@ import Foundation
 
 open class SGYOperation: Operation {
     
-    // MARK: - Initialization
-    
-    public override init() {
-        logger = Logger(source: NSStringFromClass(type(of: self)))
-        super.init()
-    }
-    
     // MARK: - Properties
     
-    open var logger: Logger
+    open var logger = Logger(source: type(of: self))
 }
