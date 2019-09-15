@@ -8,9 +8,9 @@
 import Foundation
 import CoreLocation
 
-extension CLAuthorizationStatus: CustomStringConvertible {
+extension CLAuthorizationStatus: CustomDebugStringConvertible {
     
-    public var description: String {
+    public var debugDescription: String {
         switch self {
         case .notDetermined: return "Not Determined"
         case .restricted: return "Restricted"

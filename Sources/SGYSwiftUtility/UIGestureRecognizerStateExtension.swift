@@ -10,7 +10,6 @@
 import UIKit
 
 extension UIGestureRecognizer.State: CustomDebugStringConvertible {
-    
     public var debugDescription: String {
         switch self {
         case .began: return "Began"
