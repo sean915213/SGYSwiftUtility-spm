@@ -71,7 +71,12 @@ extension Data {
 
 // MARK: Base64 Decoding
 extension Data {
-
+    /**
+     Encodes the `Data` instance using Foundation base64 encoding, then performs the appropriate replacements to match the base64 URL-encoding encoded standard.
+     
+     - returns:
+     A string base64 encoded from the data instance with appropriate UR-encoding replacements made.
+     */
     public func base64URLEncoded() -> String {
         // Create Foundation base64 string
         var base64 = base64EncodedString()
@@ -80,18 +85,5 @@ extension Data {
         base64 = base64.replacingOccurrences(of: "+", with: "-")
         base64 = base64.replacingOccurrences(of: "=", with: "")
         return base64
-    }
-}
-
-extension StringProtocol {
-    public func base64URLDecode() -> Data? {
-        var properBase64 = String(self)
-        // Reverse URL encode to Foundation friendly base64
-        properBase64 = properBase64.replacingOccurrences(of: "_", with: "/")
-        properBase64 = properBase64.replacingOccurrences(of: "-", with: "+")
-        // Re-add padding
-        while properBase64.count % 4 != 0 { properBase64 += "=" }
-        // Return string
-        return Data(base64Encoded: properBase64)
     }
 }
