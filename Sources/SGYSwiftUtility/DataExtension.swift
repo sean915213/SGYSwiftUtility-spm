@@ -6,6 +6,7 @@
 
 import Foundation
 
+// MARK: Hexidecimal Conversion
 extension Data {
     
     public init?(hexString string: String) {
