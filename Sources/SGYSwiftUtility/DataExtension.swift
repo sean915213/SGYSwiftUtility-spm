@@ -81,9 +81,11 @@ extension Data {
         base64 = base64.replacingOccurrences(of: "=", with: "")
         return base64
     }
+}
 
-    func base64URLDecode<T>(string: T) -> Data? where T: StringProtocol {
-        var properBase64 = String(string)
+extension StringProtocol {
+    func base64URLDecode() -> Data? {
+        var properBase64 = String(self)
         // Reverse URL encode to Foundation friendly base64
         properBase64 = properBase64.replacingOccurrences(of: "_", with: "/")
         properBase64 = properBase64.replacingOccurrences(of: "-", with: "+")
