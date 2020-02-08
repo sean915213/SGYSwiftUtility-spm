@@ -37,9 +37,10 @@ extension Data {
     }
 }
 
-// MARK: Write Operations
+// MARK: Temp File Operations
 extension Data {
     
+    /// Characters to be removed when sanitizing file paths
     private static let sanitizedCharacters = ["/", " "]
     
     /// Writes the provided data to a file in the temp directory.
