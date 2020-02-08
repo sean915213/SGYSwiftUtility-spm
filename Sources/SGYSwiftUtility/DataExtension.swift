@@ -6,8 +6,6 @@
 
 import Foundation
 
-private let sanitizedCharacters = ["/", " "]
-
 extension Data {
     
     public init?(hexString string: String) {
@@ -37,6 +35,12 @@ extension Data {
         for byte in self { hexString += String(format: "%02x", UInt(byte)) }
         return hexString
     }
+}
+
+// MARK: Write Operations
+extension Data {
+    
+    private static let sanitizedCharacters = ["/", " "]
     
     /// Writes the provided data to a file in the temp directory.
     ///
@@ -52,7 +56,7 @@ extension Data {
         try fileManager.createDirectory(at: containingDirectory, withIntermediateDirectories: false, attributes: nil)
         // Sanitize file's name
         var fileName = name
-        sanitizedCharacters.forEach { fileName = fileName.replacingOccurrences(of: $0, with: "") }
+        Data.sanitizedCharacters.forEach { fileName = fileName.replacingOccurrences(of: $0, with: "") }
         // Create url in this directory
         var dataUrl = containingDirectory.appendingPathComponent(fileName)
         if let `extension` = `extension` { dataUrl = dataUrl.appendingPathExtension(`extension`) }
