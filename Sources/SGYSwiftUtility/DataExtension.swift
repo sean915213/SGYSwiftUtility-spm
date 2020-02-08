@@ -68,3 +68,28 @@ extension Data {
         return dataUrl
     }
 }
+
+// MARK: Base64 Decoding
+extension Data {
+
+    func base64URLEncoded() -> String {
+        // Create Foundation base64 string
+        var base64 = base64EncodedString()
+        // Perform URL encoding replacement
+        base64 = base64.replacingOccurrences(of: "/", with: "_")
+        base64 = base64.replacingOccurrences(of: "+", with: "-")
+        base64 = base64.replacingOccurrences(of: "=", with: "")
+        return base64
+    }
+
+    func base64URLDecode<T>(string: T) -> Data? where T: StringProtocol {
+        var properBase64 = String(string)
+        // Reverse URL encode to Foundation friendly base64
+        properBase64 = properBase64.replacingOccurrences(of: "_", with: "/")
+        properBase64 = properBase64.replacingOccurrences(of: "-", with: "+")
+        // Re-add padding
+        while properBase64.count % 4 != 0 { properBase64 += "=" }
+        // Return string
+        return Data(base64Encoded: properBase64)
+    }
+}
