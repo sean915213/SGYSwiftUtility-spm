@@ -16,7 +16,7 @@ extension String {
         - characterSet: The `CharacterSet` containing the characters to be removed.
      
      - returns:
-     A new string with the provided characters removed.``
+     A new string with the provided characters removed.
      */
     public func stringRemovingCharacters(inSet characterSet: CharacterSet) -> String {
         // Construct new string from scalars
