@@ -12,9 +12,9 @@ import Foundation
 public protocol DataShellHandlerProtocol: ShellHandler {
     associatedtype Output
     
-    public var output: Output? { get set }
+    var output: Output? { get set }
     
-    public func transformData(_ data: Data) -> Output?
+    func transformData(_ data: Data) -> Output?
 }
 
 extension DataShellHandlerProtocol {
