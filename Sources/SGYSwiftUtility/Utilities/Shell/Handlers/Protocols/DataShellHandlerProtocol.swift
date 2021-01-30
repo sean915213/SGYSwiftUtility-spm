@@ -9,7 +9,7 @@
 
 import Foundation
 
-protocol DataShellHandlerProtocol: ShellHandler {
+public protocol DataShellHandlerProtocol: ShellHandler {
     associatedtype Output
     
     var output: Output? { get set }
