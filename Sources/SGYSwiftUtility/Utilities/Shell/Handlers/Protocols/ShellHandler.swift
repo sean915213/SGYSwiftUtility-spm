@@ -9,7 +9,7 @@
 
 import Foundation
 
-protocol ShellHandler: AnyObject {
+public protocol ShellHandler: AnyObject {
     func configureProcess(_ process: Process)
     func consumeFinishedProcess(_ process: Process)
 }
