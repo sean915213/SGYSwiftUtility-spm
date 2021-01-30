@@ -10,8 +10,8 @@
 import Foundation
 
 public protocol ShellHandler: AnyObject {
-    func configureProcess(_ process: Process)
-    func consumeFinishedProcess(_ process: Process)
+    public func configureProcess(_ process: Process)
+    public func consumeFinishedProcess(_ process: Process)
 }
 
 #endif
