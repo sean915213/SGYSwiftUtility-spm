@@ -11,6 +11,8 @@ import Foundation
 
 public final class ConsoleShellHandler: ShellHandler {
     
+    public init() { }
+    
     public func configureProcess(_ process: Process) {
         // Assign standard (i.e. console) output
         process.standardOutput = FileHandle.standardOutput
