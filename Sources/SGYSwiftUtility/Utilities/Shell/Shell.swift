@@ -9,12 +9,12 @@
 
 import Foundation
 
-enum Shell {
+public enum Shell {
     
-    static var phpPath = URL(fileURLWithPath: "/usr/bin/php")
+    public static var phpPath = URL(fileURLWithPath: "/usr/bin/php")
     
     @discardableResult
-    static func execute(launchURL: URL, arguments: [String], handler: ShellHandler) throws -> Int {
+    public static func execute(launchURL: URL, arguments: [String], handler: ShellHandler) throws -> Int {
         // Create task
         let task = Process()
         task.executableURL = launchURL
@@ -31,7 +31,7 @@ enum Shell {
     }
     
     @discardableResult
-    static func executePHP(code: String, arguments: [String], handler: ShellHandler = ConsoleShellHandler()) throws -> Int {
+    public static func executePHP(code: String, arguments: [String], handler: ShellHandler = ConsoleShellHandler()) throws -> Int {
         let args = ["-r", code] + arguments
         return try execute(launchURL: phpPath, arguments: args, handler: handler)
     }

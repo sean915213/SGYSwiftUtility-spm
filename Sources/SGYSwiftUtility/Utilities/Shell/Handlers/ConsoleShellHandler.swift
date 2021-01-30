@@ -9,14 +9,14 @@
 
 import Foundation
 
-final class ConsoleShellHandler: ShellHandler {
+public final class ConsoleShellHandler: ShellHandler {
     
-    func configureProcess(_ process: Process) {
+    public func configureProcess(_ process: Process) {
         // Assign standard (i.e. console) output
         process.standardOutput = FileHandle.standardOutput
     }
     
-    func consumeFinishedProcess(_ process: Process) {
+    public func consumeFinishedProcess(_ process: Process) {
         // Nothing to do as output is shunted to console
     }
 }

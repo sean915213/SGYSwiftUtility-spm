@@ -9,22 +9,22 @@
 
 import Foundation
 
-class StringShellHandler: DataShellHandlerProtocol {
+public class StringShellHandler: DataShellHandlerProtocol {
     
     // MARK: - Initialization
     
-    init(encoding: String.Encoding = .utf8) {
+    public init(encoding: String.Encoding = .utf8) {
         self.encoding = encoding
     }
     
     // MARK: - Properties
     
-    let encoding: String.Encoding
-    var output: String?
+    public let encoding: String.Encoding
+    public var output: String?
     
     // MARK: - Methods
     
-    func transformData(_ data: Data) -> String? {
+    public func transformData(_ data: Data) -> String? {
         return String(data: data, encoding: encoding)
     }
 }

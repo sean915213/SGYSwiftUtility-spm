@@ -9,15 +9,15 @@
 
 import Foundation
 
-class DataShellHandler: DataShellHandlerProtocol {
+public class DataShellHandler: DataShellHandlerProtocol {
     
     // MARK: - Properties
     
-    var output: Data?
+    public var output: Data?
     
     // MARK: - Methods
     
-    func transformData(_ data: Data) -> Data? {
+    public func transformData(_ data: Data) -> Data? {
         return data
     }
 }
