@@ -11,14 +11,16 @@ import UIKit
 
 extension UIViewController {
     
-    public func addChild(_ child: UIViewController, withConfigureViewBlock configureBlock: (UIView, () -> Void) -> Void) {
+    public func addChild(_ child: UIViewController, withConfigureViewBlock configureBlock: (UIView) -> Void) {
         addChild(child)
-        configureBlock(child.view, { child.didMove(toParent: self) })
+        configureBlock(child.view)
+        child.didMove(toParent: self)
     }
     
-    public func removeFromParent(withRemoveViewBlock removeBlock: (() -> Void) -> Void) {
+    public func removeFromParent(withRemoveViewBlock removeBlock: () -> Void) {
         willMove(toParent: nil)
-        removeBlock({ removeFromParent() })
+        removeBlock()
+        removeFromParent()
     }
 }
 
