@@ -25,12 +25,4 @@ extension NamedManagedObject {
     public static func makeFetchRequest() -> NSFetchRequest<Self> {
         return NSFetchRequest<Self>(entityName: Self.entityName)
     }
-    
-    /// Inserts a new object of this type into the provided context.
-    ///
-    /// - Parameter context: The `NSManagedObjectContext` to insert the new instance into.
-    /// - Returns: A newly inserted instance of `Self`.
-    public static func insertNew(into context: NSManagedObjectContext) -> Self {
-        return NSEntityDescription.insertNewObject(forEntityClass: Self.self, into: context)
-    }
 }
