@@ -11,17 +11,17 @@ import Foundation
 extension UserDefaults {
     
     /// Provides a method for retrieval and casting of UserDefaults values to type `T`.
-    /// - Parameter key: The key for the object in UserDefaults.
+    /// - Parameter defaultName: A key in the current user‘s defaults database.
     /// - Returns: An instance of `T` retrieved from this UserDefaults instance or `nil` if no object was found or could not be cast to `T`.
-    public func object<T>(forKey key: String) -> T? {
-        return object(forKey: key) as? T
+    public func object<T>(forKey defaultName: String) -> T? {
+        return object(forKey: defaultName) as? T
     }
     
     /// Provides a method for retrieval and casting of UserDefaults values to a RawRepresentable type `T`.
-    /// - Parameter key: The key for the object in UserDefaults.
+    /// - Parameter defaultName: A key in the current user‘s defaults database.
     /// - Returns: An instance of `T` initialized from the raw value or `nil` if no value exists or cannot be used to initialize `T`.
-    public func object<T>(forKey key: String) -> T? where T: RawRepresentable {
-        if let rawValue: T.RawValue = object(forKey: key) { return T(rawValue: rawValue) }
+    public func object<T>(forKey defaultName: String) -> T? where T: RawRepresentable {
+        if let rawValue: T.RawValue = object(forKey: defaultName) { return T(rawValue: rawValue) }
         return nil
     }
     
