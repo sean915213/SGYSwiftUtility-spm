@@ -11,6 +11,8 @@ import Foundation
 
 public class MutedShellHandler: ShellHandler {
     
+    public init() { }
+    
     public func configureProcess(_ process: Process) {
         // Nil output so nothing is printed from executed
         process.standardOutput = nil
