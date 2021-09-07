@@ -1,5 +1,5 @@
 //
-//  RequiredBlockParam.swift
+//  RequiredBlock.swift
 //  JarusPnCApp
 //
 //  Created by Sean Young on 9/3/21.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// A class that can be executed as a block, allowing it to detect when it has gone out of scope without being executed and raising an assertion if so.
-class RequiredBlockParam<Param, Return> {
+class RequiredBlock<Param, Return> {
     
     typealias Block = (Param) -> Return
     
@@ -25,9 +25,7 @@ class RequiredBlockParam<Param, Return> {
     }
     
     deinit {
-        if !didCall {
-            assertionFailure(failureMessage)
-        }
+        assert(didCall, failureMessage)
     }
     
     // MARK: - Properties
@@ -44,5 +42,13 @@ class RequiredBlockParam<Param, Return> {
     @discardableResult func callAsFunction(_ param: Param) -> Return {
         didCall = true
         return block(param)
+    }
+}
+
+extension RequiredBlock where Param == Void {
+    /// Executes the block the instance contains.
+    /// - Returns: The return type expected by the block.
+    @discardableResult func callAsFunction() -> Return {
+        callAsFunction(())
     }
 }
