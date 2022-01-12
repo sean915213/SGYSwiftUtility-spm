@@ -128,6 +128,22 @@ extension NSLayoutConstraint {
         return NSLayoutConstraint.constraints(withVisualFormat: layoutString, options: NSLayoutConstraint.FormatOptions(), metrics: layoutMetrics, views: layoutViews)
     }
     
+    class func constraintsPinningView(_ view: UIView, toLayoutGuide layoutGuide: UILayoutGuide) -> [NSLayoutConstraint] {
+        return constraintsPinningView(view, toLayoutGuide: layoutGuide, axis: .horizontal) + constraintsPinningView(view, toLayoutGuide: layoutGuide, axis: .vertical)
+    }
+    
+    class func constraintsPinningView(_ view: UIView, toLayoutGuide layoutGuide: UILayoutGuide, axis: NSLayoutConstraint.Axis) -> [NSLayoutConstraint] {
+        switch axis {
+        case .horizontal:
+            return [view.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor), view.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor)]
+        case .vertical:
+            return [view.topAnchor.constraint(equalTo: layoutGuide.topAnchor), view.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor)]
+        @unknown default:
+            assertionFailure("Unknown axis")
+            return []
+        }
+    }
+    
     @discardableResult
     public func withPriority(_ priority: UILayoutPriority) -> NSLayoutConstraint {
         self.priority = priority
