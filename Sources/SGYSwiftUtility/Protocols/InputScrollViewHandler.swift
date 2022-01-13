@@ -26,7 +26,7 @@ extension InputScrollViewHandler {
         keyboardObservers.registerObserver(forName: UIResponder.keyboardWillShowNotification) { [unowned self] in self.keyboardWillShow(notification: $0) }
         keyboardObservers.registerObserver(forName: UIResponder.keyboardWillHideNotification) { [unowned self] in self.keyboardWillHide(notification: $0) }
     }
-    ß
+    
     private func keyboardWillShow(notification: Notification) {
         // Check whether scrollView's contentSize has a non-zero width. If it does, this won't work and is difficult to debug.
         assert(scrollView.contentSize.width > 0, "ScrollView's contentSize.width must be non-zero to scroll the keyboard for input. This is likely a layout error and should be fixed.")
