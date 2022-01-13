@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "SGYSwiftUtility",
     platforms: [
-        .iOS(.v9),
+        .iOS(.v11),
         .macOS(.v10_13)
     ],
     products: [
