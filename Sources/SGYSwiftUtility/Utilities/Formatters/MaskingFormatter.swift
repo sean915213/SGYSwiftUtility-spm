@@ -21,7 +21,7 @@ public class MaskingFormatter: Formatter {
     
     // MARK: - Methods
     
-    override func string(for obj: Any?) -> String? {
+    override public func string(for obj: Any?) -> String? {
         // Require string to format
         guard let stringVal = obj as? String else { return nil }
         // Add masking character to set so we also skip

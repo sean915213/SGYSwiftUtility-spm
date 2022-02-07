@@ -10,7 +10,7 @@ import UIKit
 /// Simplifies the implementation of logic that scrolls first responders into view upon activating the keyboard. Adopters need only to call `registerKeyboardObservers()` to gain basic functionality.
 public protocol InputScrollViewHandler: UIViewController {
     var scrollView: UIScrollView { get }
-    var keyboardObservers: ObserverContainer { get }
+    var keyboardObservers: [NSObjectProtocol] { get set }
 }
 
 extension InputScrollViewHandler {
@@ -18,13 +18,17 @@ extension InputScrollViewHandler {
     /// Registers the necessary notification observers to detect when the keyboard is displayed and therefore scroll any first responders into view.
     public func registerKeyboardObservers() {
         // Make sure this is only called once per object lifetime
-        assert(keyboardObservers.observers.isEmpty, "\(#function) should only be called once per object lifetime. This is a programmer error and the logic should be cleaned up.")
+        assert(keyboardObservers.isEmpty, "\(#function) should only be called once per object lifetime. This is a programmer error and the logic should be cleaned up.")
         // This logic does not work properly when this class inherits from UITableViewController. This will cause weird issues due to its own poorly implemented scrolling logic.
         assert(!(self is UITableViewController), "This protocol will not function properly in a class inheriting from UITableViewController.")
         // Add observers for keyboard notifications
         // NOTE: The [unowned self] directive is important to avoid reference cycles
-        keyboardObservers.registerObserver(forName: UIResponder.keyboardWillShowNotification) { [unowned self] in self.keyboardWillShow(notification: $0) }
-        keyboardObservers.registerObserver(forName: UIResponder.keyboardWillHideNotification) { [unowned self] in self.keyboardWillHide(notification: $0) }
+        keyboardObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main, using: { [unowned self] notification in
+            keyboardWillShow(notification: notification)
+        }))
+        keyboardObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main, using: { [unowned self] notification in
+            keyboardWillHide(notification: notification)
+        }))
     }
     
     private func keyboardWillShow(notification: Notification) {
