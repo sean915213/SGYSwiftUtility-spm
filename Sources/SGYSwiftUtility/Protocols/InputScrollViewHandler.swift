@@ -46,7 +46,7 @@ extension InputScrollViewHandler {
         scrollView.contentInset.bottom = intersection.height - scrollView.safeAreaInsets.bottom
         scrollView.verticalScrollIndicatorInsets.bottom = intersection.height - scrollView.safeAreaInsets.bottom
         // Get current responder's frame
-        guard let responderView = scrollView.findFirstResponder() as? UIView else { return }
+        guard let responderView = scrollView.findFirstResponder() else { return }
         let responderFrame = scrollView.convert(responderView.frame, from: responderView.superview)
         // Scroll responder into view
         scrollView.scrollRectToVisible(responderFrame, animated: true)

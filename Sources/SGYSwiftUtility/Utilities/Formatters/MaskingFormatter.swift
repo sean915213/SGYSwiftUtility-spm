@@ -13,7 +13,7 @@ public class MaskingFormatter: Formatter {
     // MARK: - Properties
     
     /// The string that acts as the mask for a masked character.
-    public var maskingCharacter = Character("*")
+    public var maskingCharacter: Unicode.Scalar = "*"
     /// The set of characters that should be masked.
     public var maskedCharacters = CharacterSet()
     /// The maximum number of characters to mask. If `nil`all characters will be masked.
@@ -28,19 +28,19 @@ public class MaskingFormatter: Formatter {
         // Create masked version
         var masked = ""
         var maskedCount = 0
-        for nextChar in stringVal {
+        for nextChar in stringVal.unicodeScalars {
             // If not in masked characters AND isn't the masking character itself then skip altogether
             guard maskedCharacters.contains(nextChar) || nextChar == maskingCharacter else {
-                masked.append(nextChar)
+                masked.unicodeScalars.append(nextChar)
                 continue
             }
             // If didn't reach masked count then mask
             if maximumMaskCount == nil || maskedCount < maximumMaskCount! {
-                masked.append(maskingCharacter)
+                masked.unicodeScalars.append(maskingCharacter)
                 maskedCount += 1
             } else {
                 // Unmasked value
-                masked.append(nextChar)
+                masked.unicodeScalars.append(nextChar)
             }
         }
         // Return masked string
