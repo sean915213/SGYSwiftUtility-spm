@@ -13,6 +13,9 @@ import Combine
 
 @available(iOS 13, *)
 extension Publisher {
+    
+    /// Returns a new publisher that will receive any further events on the main queue.
+    /// - Returns: A publisher.
     public func receiveOnMain() -> AnyPublisher<Output, Failure> {
         return receive(on: DispatchQueue.main, options: nil).eraseToAnyPublisher()
     }
