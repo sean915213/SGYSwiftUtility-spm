@@ -6,10 +6,16 @@
 //
 
 import Foundation
+
+#if canImport(Combine)
+
 import Combine
 
+@available(iOS 13, *)
 extension Publisher {
-    public func receiveOnMain() -> AnyPublisher {
+    public func receiveOnMain() -> AnyPublisher<Output, Failure> {
         return receive(on: DispatchQueue.main, options: nil).eraseToAnyPublisher()
     }
 }
+
+#endif
