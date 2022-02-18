@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 extension Publisher {
-    func receiveOnMain() -> AnyPublisher {
+    public func receiveOnMain() -> AnyPublisher {
         return receive(on: DispatchQueue.main, options: nil).eraseToAnyPublisher()
     }
 }
