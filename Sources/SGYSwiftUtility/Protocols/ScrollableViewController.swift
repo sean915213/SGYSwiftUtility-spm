@@ -37,4 +37,19 @@ extension ScrollableViewController {
             assertionFailure("Unhandled axis case: \(scrollableAxis)")
         }
     }
+    
+    /// Scrolls to the top view in a list of views.
+    /// - Parameter views: The array of views to determine the top and scroll to.
+    public func scrollToTopView(in views: [UIView]) {
+        var topViewRect: CGRect? = nil
+        for view in views {
+            // Get rect in scrollView
+            let viewRect = view.convert(view.frame, to: scrollView)
+            if viewRect.minY < (topViewRect?.minY ?? CGFloat.greatestFiniteMagnitude) {
+                topViewRect = viewRect
+            }
+        }
+        // If a rect assigned scroll to
+        if let topRect = topViewRect { scrollView.scrollRectToVisible(topRect, animated: true) }
+    }
 }
