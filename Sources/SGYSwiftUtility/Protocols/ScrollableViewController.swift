@@ -39,8 +39,10 @@ extension ScrollableViewController {
     }
     
     /// Scrolls to the top view in a list of views.
-    /// - Parameter views: The array of views to determine the top and scroll to.
-    public func scrollToTopView(in views: [UIView]) {
+    /// - Parameters:
+    ///   - views: The array of views to determine the top and scroll to.
+    ///   - animated: Whether to animate the scrolling.
+    public func scrollToTopView(in views: [UIView], animated: Bool = true) {
         var topViewRect: CGRect? = nil
         for view in views {
             // Get rect in scrollView
@@ -50,6 +52,6 @@ extension ScrollableViewController {
             }
         }
         // If a rect assigned scroll to
-        if let topRect = topViewRect { scrollView.scrollRectToVisible(topRect, animated: true) }
+        if let topRect = topViewRect { scrollView.scrollRectToVisible(topRect, animated: animated) }
     }
 }
