@@ -35,6 +35,18 @@ extension UIViewController {
         // If grabber visible then increase the safe area
         if preferGrabberVisible { additionalSafeAreaInsets.top = 8 }
     }
+    
+    /// Dismisses the `UIViewController` based on how it was presented. I.e.- if pushed on the navigation stack it will be popped back to the presenting controller. If presented, it will be dismissed.
+    /// - Parameters:
+    ///   - controller: The view controller to dismiss.
+    ///   - animated: Whether to animate the dismissal.
+    public func globalDismiss(controller: UIViewController, animated: Bool = true) {
+        if navigationController?.viewControllers.contains(controller) == true {
+            navigationController?.popToViewController(self, animated: animated)
+        } else {
+            controller.dismiss(animated: animated)
+        }
+    }
 }
 
 #endif
