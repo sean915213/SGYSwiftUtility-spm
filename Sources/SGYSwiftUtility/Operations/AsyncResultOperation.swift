@@ -11,7 +11,7 @@ import Foundation
 
 import Combine
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 10.15, *)
 open class AsyncResultOperation<ResultType>: AsyncOperation {
     
     // MARK: - Initialization

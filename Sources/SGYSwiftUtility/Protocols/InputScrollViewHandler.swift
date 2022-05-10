@@ -5,6 +5,8 @@
 //  Created by Sean Young on 1/13/22.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 /// Simplifies the implementation of logic that scrolls first responders into view upon activating the keyboard. Adopters need only to call `registerKeyboardObservers()` to gain basic functionality.
@@ -57,3 +59,5 @@ extension InputScrollViewHandler {
         scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
 }
+
+#endif

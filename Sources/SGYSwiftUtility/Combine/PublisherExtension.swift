@@ -11,7 +11,7 @@ import Foundation
 
 import Combine
 
-@available(iOS 13, *)
+@available(iOS 13, macOS 10.15, *)
 extension Publisher {
     
     /// Returns a new publisher that will receive any further events on the main queue.

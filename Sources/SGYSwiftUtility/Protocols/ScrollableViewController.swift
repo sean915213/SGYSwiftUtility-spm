@@ -5,6 +5,8 @@
 //  Created by Sean Young on 1/13/22.
 //
 
+#if canImport(UIKit)
+
 import UIKit
 
 /// A protocol helping view controllers to create content scrollable in a single direction.
@@ -55,3 +57,5 @@ extension ScrollableViewController {
         if let topRect = topViewRect { scrollView.scrollRectToVisible(topRect, animated: animated) }
     }
 }
+
+#endif
