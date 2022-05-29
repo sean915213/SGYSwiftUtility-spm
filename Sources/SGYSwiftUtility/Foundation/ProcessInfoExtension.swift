@@ -11,8 +11,8 @@ extension ProcessInfo {
     
     /// A type-safe struct for representing options arguments that could be set in the currently running scheme.
     public struct Argument: RawRepresentable {
-        init(rawValue: String) { self.rawValue = rawValue }
-        let rawValue: String
+        public init(rawValue: String) { self.rawValue = rawValue }
+        public let rawValue: String
     }
     
     /// A convenience method for searching the current process's arguments list for a defined `Argument`.

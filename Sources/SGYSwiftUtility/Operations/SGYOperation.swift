@@ -12,5 +12,5 @@ open class SGYOperation: Operation {
     
     // MARK: - Properties
     
-    open var logger = Logger(source: type(of: self))
+    open lazy var logger = Logger(source: type(of: self))
 }
