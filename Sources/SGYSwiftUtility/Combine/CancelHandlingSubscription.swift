@@ -12,6 +12,7 @@ import Foundation
 import Combine
 
 @available(iOS 13, macOS 10.15, *)
+/// A custom `Subscription` class exposing a hook for cancellation.
 open class CancelHandlingSubscription<Target: Subscriber>: Subscription {
     
     // MARK: - Initialization
