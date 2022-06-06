@@ -44,6 +44,13 @@ extension UICollectionView {
     public func dequeueReusableSupplementaryView<T: UICollectionReusableView>(ofKind elementKind: String, withReuseIdentifier reuseIdentifier: String, for indexPath: IndexPath) -> T {
         return dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: reuseIdentifier, for: indexPath) as! T
     }
+    
+    
+    /// Deselects all selected items.
+    /// - Parameter animated: Whether the animate the deselection.
+    public func deselectAllItems(animated: Bool = true) {
+        indexPathsForSelectedItems?.forEach { deselectItem(at: $0, animated: animated) }
+    }
 }
 
 #endif
