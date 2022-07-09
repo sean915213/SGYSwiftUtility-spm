@@ -12,11 +12,13 @@ import UIKit
 import Combine
 
 /// Simplifies the implementation of logic that scrolls first responders into view upon activating the keyboard. Adopters need only to call `registerKeyboardObservers()` to gain basic functionality.
+@available(iOS 13, *)
 public protocol ScrollViewInputHandler: UIViewController {
     var scrollView: UIScrollView { get }
     var keyboardObservers: [AnyCancellable] { get set }
 }
 
+@available(iOS 13, *)
 extension ScrollViewInputHandler {
     
     /// Registers the necessary notification observers to detect when the keyboard is displayed and therefore scroll any first responders into view.

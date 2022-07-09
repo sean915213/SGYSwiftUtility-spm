@@ -9,9 +9,11 @@
 
 import UIKit
 
+@available(iOS 13, *)
 public protocol ScrollableInputViewController: ScrollableViewController & ScrollViewInputHandler { }
 
 /// Combines `ScrollableViewController` and `ScrollViewInputHandler`.
+@available(iOS 13, *)
 extension ScrollableInputViewController {
     /// Sets up the controller's main view with a scroll view which contains a content view to place content on that can be scrolled in the specified direction. Optionally also registers keyboard observers for modifying offset when keyboard is displayed.
     /// - Parameters:
