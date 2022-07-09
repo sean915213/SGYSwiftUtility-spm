@@ -6,13 +6,15 @@
 //
 
 #if canImport(UIKit)
+#if canImport(Combine)
 
 import UIKit
+import Combine
 
 /// Simplifies the implementation of logic that scrolls first responders into view upon activating the keyboard. Adopters need only to call `registerKeyboardObservers()` to gain basic functionality.
 public protocol ScrollViewInputHandler: UIViewController {
     var scrollView: UIScrollView { get }
-    var keyboardObservers: [NSObjectProtocol] { get set }
+    var keyboardObservers: [AnyCancellable] { get set }
 }
 
 extension ScrollViewInputHandler {
@@ -25,12 +27,12 @@ extension ScrollViewInputHandler {
         assert(!(self is UITableViewController), "This protocol will not function properly in a class inheriting from UITableViewController.")
         // Add observers for keyboard notifications
         // NOTE: The [unowned self] directive is important to avoid reference cycles
-        keyboardObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main, using: { [unowned self] notification in
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification).sink { [unowned self] notification in
             keyboardWillShow(notification: notification)
-        }))
-        keyboardObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main, using: { [unowned self] notification in
+        }.store(in: &keyboardObservers)
+        NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification).sink { [unowned self] notification in
             keyboardWillHide(notification: notification)
-        }))
+        }.store(in: &keyboardObservers)
     }
     
     private func keyboardWillShow(notification: Notification) {
@@ -60,4 +62,5 @@ extension ScrollViewInputHandler {
     }
 }
 
+#endif
 #endif
