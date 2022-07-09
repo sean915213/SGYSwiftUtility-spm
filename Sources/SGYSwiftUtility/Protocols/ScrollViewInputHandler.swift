@@ -1,5 +1,5 @@
 //
-//  InputScrollViewHandler.swift
+//  ScrollViewInputHandler.swift
 //  
 //
 //  Created by Sean Young on 1/13/22.
@@ -10,12 +10,12 @@
 import UIKit
 
 /// Simplifies the implementation of logic that scrolls first responders into view upon activating the keyboard. Adopters need only to call `registerKeyboardObservers()` to gain basic functionality.
-public protocol InputScrollViewHandler: UIViewController {
+public protocol ScrollViewInputHandler: UIViewController {
     var scrollView: UIScrollView { get }
     var keyboardObservers: [NSObjectProtocol] { get set }
 }
 
-extension InputScrollViewHandler {
+extension ScrollViewInputHandler {
     
     /// Registers the necessary notification observers to detect when the keyboard is displayed and therefore scroll any first responders into view.
     public func registerKeyboardObservers() {
