@@ -7,7 +7,7 @@
 
 import Foundation
 
-private let plistCache = NSCache<NSString, ValueWrapper>()
+private let plistCache = NSCache<NSString, NSData>()
 private let decoder = PropertyListDecoder()
 
 extension PropertyListManager.Name {
@@ -34,14 +34,9 @@ public enum PropertyListManager {
     ///   - bundle: The bundle to load the plist from. Defaults to `main`.
     /// - Returns: The plist decoded to type `T`.
     public static func objectFromList<T>(named name: Name, ofType type: T.Type, from bundle: Bundle = Bundle.main) throws -> T where T: Decodable {
-        // Attempt pulling from cache
-        if let cached = plistCache.object(forKey: name.rawValue as NSString)?.value as? T { return cached }
-        // Otherwise read data and decode
+        // Read data and decode
         let data = try dataFromList(named: name, from: bundle)
-        let value = try decoder.decode(T.self, from: data)
-        // Store in cache and return
-        plistCache.setObject(ValueWrapper(value: value), forKey: name.rawValue as NSString)
-        return value
+        return try decoder.decode(T.self, from: data)
     }
     
     /// Loads the provided plist as a dictionary.
@@ -50,18 +45,19 @@ public enum PropertyListManager {
     ///   - bundle: The bundle to load the plist from. Defaults to `main`.
     /// - Returns: The plist decoded as a dictionary.
     public static func dictionaryFromList(named name: Name, from bundle: Bundle = Bundle.main) throws -> [String: Any] {
-        // Attempt pulling from cache
-        if let cached = plistCache.object(forKey: name.rawValue as NSString)?.value as? [String: Any] { return cached }
-        // Otherwise read data and decode
+        // Read data and decode
         let data = try dataFromList(named: name, from: bundle)
-        let dictionary = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as! [String: Any]
-        // Store in cache and return
-        plistCache.setObject(ValueWrapper(value: dictionary), forKey: name.rawValue as NSString)
-        return dictionary
+        return try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as! [String: Any]
     }
     
     private static func dataFromList(named name: Name, from bundle: Bundle) throws -> Data {
+        // Attempt pulling from cache
+        if let cached = plistCache.object(forKey: name.rawValue as NSString) { return cached as Data }
+        // Otherwise load from disk
         guard let url = bundle.url(forResource: name.rawValue, withExtension: "plist") else { throw Error.invalidName }
-        return try Data(contentsOf: url)
+        let data = try Data(contentsOf: url)
+        // Assign to cache before returning
+        plistCache.setObject(data as NSData, forKey: name.rawValue as NSString)
+        return data
     }
 }
