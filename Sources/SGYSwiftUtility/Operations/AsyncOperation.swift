@@ -6,7 +6,7 @@
 
 import Foundation
 
-open class AsyncOperation: SGYOperation {
+open class AsyncOperation: Operation {
     
     // MARK: Required NSOperation properties to support asynchronous execution
 
