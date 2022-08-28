@@ -25,6 +25,10 @@ extension Logger {
             self.rawValue = rawValue
         }
         
+        public init(_ category: String) {
+            self = .init(rawValue: category)!
+        }
+        
         public var rawValue: String
     }
     
