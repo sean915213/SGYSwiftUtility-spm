@@ -11,11 +11,11 @@ import OSLog
 import Combine
 
 @available(iOS 15, *)
-class LogStreamer {
+public class LogStreamer {
 
     // MARK: - Initialization
     
-    init(categories: [String]) throws {
+    public init(categories: [String]) throws {
         logCategories = categories
         // Attempt creating log store
         logStore = try OSLogStore(scope: .currentProcessIdentifier)
@@ -24,8 +24,8 @@ class LogStreamer {
     
     // MARK: - Properties
     
-    let logCategories: [String]
-    private(set) var entries = [OSLogEntry]()
+    public let logCategories: [String]
+    public private(set) var entries = [OSLogEntry]()
     
     private let logStore: OSLogStore
     private let queue = DispatchQueue(label: "com.sdot.logStreamer", qos: .utility)
@@ -33,7 +33,7 @@ class LogStreamer {
     private lazy var logger = Logger(category: String(describing: type(of: self)))
     
     private let entriesSubject = PassthroughSubject<[OSLogEntry], Never>()
-    private(set) lazy var publisher = entriesSubject.eraseToAnyPublisher()
+    public private(set) lazy var publisher = entriesSubject.eraseToAnyPublisher()
     
     // MARK: - Methods
     
@@ -69,7 +69,7 @@ class LogStreamer {
 
 @available(iOS 15, *)
 extension LogStreamer {
-    convenience init(categories: [Logger.Category]) throws {
+    public convenience init(categories: [Logger.Category]) throws {
         try self.init(categories: categories.map { $0.rawValue })
     }
 }
