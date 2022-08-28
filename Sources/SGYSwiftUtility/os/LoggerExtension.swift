@@ -11,20 +11,24 @@ import os
 @available(iOS 14, *)
 extension Logger {
     
-    static var subsystem = Bundle.main.bundleIdentifier ?? ""
+    public static var subsystem = Bundle.main.bundleIdentifier ?? ""
     
-    init(category: String) {
+    public init(category: String) {
         self.init(subsystem: type(of: self).subsystem, category: category)
     }
 }
 
 @available(iOS 14, *)
 extension Logger {
-    struct Category: RawRepresentable {
-        var rawValue: String
+    public struct Category: RawRepresentable {
+        public init?(rawValue: String) {
+            self.rawValue = rawValue
+        }
+        
+        public var rawValue: String
     }
     
-    init(category: Category) {
+    public init(category: Category) {
         self.init(subsystem: type(of: self).subsystem, category: category.rawValue)
     }
 }
